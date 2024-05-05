@@ -1,0 +1,18 @@
+diff --git a/drivers/input/touchscreen/focaltech_touch/focaltech_core.c b/drivers/input/touchscreen/focaltech_touch/focaltech_core.c
+index 779df691ad11cf..028e72e9603703 100644
+--- a/drivers/input/touchscreen/focaltech_touch/focaltech_core.c
++++ b/drivers/input/touchscreen/focaltech_touch/focaltech_core.c
+@@ -1281,6 +1281,13 @@ static int fts_power_source_init(struct fts_ts_data *ts_data)
+         FTS_ERROR("get vdd regulator failed,ret=%d", ret);
+         return ret;
+     }
++    FTS_ERROR("VDD COUNT VOLTAGES: %d", regulator_count_voltages(ts_data->vdd)); // 256
++    FTS_ERROR("VDD ENABLED: %d", regulator_is_enabled(ts_data->vdd)); // -22
++    FTS_ERROR("VDD VOLTAGE: %d", regulator_get_voltage(ts_data->vdd)); // 2800000
++    FTS_ERROR("VDD CURRENT LIMIT: %d", regulator_get_current_limit(ts_data->vdd)); // -22
++    FTS_ERROR("VDD SET VOLTAGE: %d", regulator_set_voltage(ts_data->vdd, FTS_VTG_MIN_UV, FTS_VTG_MAX_UV)); // -22
++    regulator_put(ts_data->vdd); // caused reboot
++    return -1;
+ 
+     if (regulator_count_voltages(ts_data->vdd) > 0) {
+         ret = regulator_set_voltage(ts_data->vdd, FTS_VTG_MIN_UV,

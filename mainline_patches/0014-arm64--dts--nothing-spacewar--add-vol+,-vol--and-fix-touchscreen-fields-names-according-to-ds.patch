@@ -1,0 +1,98 @@
+diff --git a/arch/arm64/boot/dts/qcom/sm7325-nothing-spacewar.dts b/arch/arm64/boot/dts/qcom/sm7325-nothing-spacewar.dts
+index 0fd833063effb5..60a922818de147 100644
+--- a/arch/arm64/boot/dts/qcom/sm7325-nothing-spacewar.dts
++++ b/arch/arm64/boot/dts/qcom/sm7325-nothing-spacewar.dts
+@@ -8,14 +8,13 @@
+ 
+ #include <dt-bindings/iio/qcom,spmi-adc7-pm7325.h>
+ #include <dt-bindings/iio/qcom,spmi-adc7-pmk8350.h>
++#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
+ #include "sm7325.dtsi"
+ #include "pm7250b.dtsi"
+ #include "pm7325.dtsi"
+ #include "pm8350c.dtsi" /* PM7350C */
+ #include "pmk8350.dtsi" /* PMK7325 */
+ 
+-/delete-node/ &rmtfs_mem;
+-
+ //TODO:
+ // * remove clk_ignore_unused and pd_ignore_unused
+ // * sort node labels in alphabet order
+@@ -30,6 +29,19 @@
+     qcom,board-id = <0x1000b 0x00>;
+     chassis-type = "handset";
+ 
++	gpio-keys {
++		compatible = "gpio-keys";
++
++		pinctrl-0 = <&volume_down_default>;
++		pinctrl-names = "default";
++
++		key-volume-up {
++			label = "Volume up";
++			gpios = <&pm7325_gpios 6 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_VOLUMEUP>;
++		};
++	};
++
+     reserved-memory {
+         #address-cells = <2>;
+         #size-cells = <2>;
+@@ -474,7 +486,7 @@
+ 	vdda-supply = <&vreg_l6b>;
+ 	status = "okay";
+ 
+-	panel@0 {
++	drm_panel: panel@0 {
+ 		compatible = "mdss,rm692e5-visionox-amoled-120hz";
+ 		reg = <0>;
+ 
+@@ -516,15 +528,12 @@
+ 		spi-max-frequency = <6000000>;
+ 		interrupt-parent = <&tlmm>;
+ 		interrupts = <81 0x2008>;
+-		reset-gpios = <&tlmm 105 0x00>;
++		focaltech,reset-gpio = <&tlmm 105 0x00>;
+ 		focaltech,irq-gpio = <&tlmm 81 0x2008>;
+ 		focaltech,display-coords = <0 0 1080 2400>;
+ 		focaltech,max-touch-number = <10>;
+ 		focaltech,ic-type = <0x3658D488>;
+ 
+-		touchscreen-size-x = <1080>;
+-		touchscreen-size-y = <2400>;
+-
+ 		vdd-supply = <&vreg_l3c>;
+ 		iovdd-supply = <&vreg_l8c>;
+ 
+@@ -537,6 +546,29 @@
+ 		focaltech,trusted-touch-spi-irq = <601>;
+ 		focaltech,trusted-touch-io-bases = <0xf134000 0xf135000 0xf136000 0xf137000 0xf169000 0xf151000 0xa94000 0x00a10000>;
+ 		focaltech,trusted-touch-io-sizes = <0x1000 0x1000 0x1000 0x1000 0x1000 0x1000 0x1000 0x4000>;
+-		//panel = <&dsi_rm692e5_visionox_amoled_120hz_cmd>;
++		//panel = <&drm_panel>;
++	};
++};
++
++&pon_resin {
++	linux,code = <KEY_VOLUMEDOWN>;
++	status = "okay";
++};
++
++&pm7325_gpios {
++	volume_down_default: volume-down-default-state {
++		pins = "gpio6";
++		function = PMIC_GPIO_FUNC_NORMAL;
++		power-source = <1>;
++		bias-pull-up;
++		input-enable;
+ 	};
++};
++
++&qupv3_id_0 {
++	status = "okay";
++};
++
++&qupv3_id_1 {
++	status = "okay";
+ };
+\ No newline at end of file

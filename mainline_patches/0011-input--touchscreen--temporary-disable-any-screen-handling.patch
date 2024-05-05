@@ -1,0 +1,17 @@
+diff --git a/drivers/input/touchscreen/focaltech_touch/focaltech_core.c b/drivers/input/touchscreen/focaltech_touch/focaltech_core.c
+index fa234e195526e3..7d03da105ae746 100644
+--- a/drivers/input/touchscreen/focaltech_touch/focaltech_core.c
++++ b/drivers/input/touchscreen/focaltech_touch/focaltech_core.c
+@@ -31,6 +31,12 @@
+ /*****************************************************************************
+ * Included header files
+ *****************************************************************************/
++
++// disable for now as notifier functions using incompatible api
++#undef CONFIG_FB
++#undef CONFIG_DRM
++#undef CONFIG_DRM_PANEL
++
+ #include <linux/module.h>
+ #include <linux/init.h>
+ #include <linux/of.h>
