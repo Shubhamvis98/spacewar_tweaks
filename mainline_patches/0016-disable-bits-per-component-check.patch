@@ -1,5 +1,5 @@
---- staging2_6.9/drivers/gpu/drm/msm/dsi/dsi_host.c	2024-04-21 08:52:01.000000000 +0000
-+++ staging2/drivers/gpu/drm/msm/dsi/dsi_host.c	2024-05-05 10:18:42.651096919 +0000
+--- a/drivers/gpu/drm/msm/dsi/dsi_host.c	2024-04-21 08:52:01.000000000 +0000
++++ b/drivers/gpu/drm/msm/dsi/dsi_host.c	2024-05-05 10:18:42.651096919 +0000
 @@ -1789,12 +1789,12 @@
  		DRM_DEV_ERROR(&msm_host->pdev->dev, "DSI does not support fractional bits_per_pixel\n");
  		return -EINVAL;
