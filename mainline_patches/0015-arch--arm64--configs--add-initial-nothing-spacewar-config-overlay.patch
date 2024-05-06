@@ -1,9 +1,0 @@
-diff --git a/arch/arm64/configs/nothing-spacewar.config b/arch/arm64/configs/nothing-spacewar.config
-new file mode 100644
-index 00000000000000..7056c7a9de5150
---- /dev/null
-+++ b/arch/arm64/configs/nothing-spacewar.config
-@@ -0,0 +1,2 @@
-+CONFIG_TOUCHSCREEN_FTS=m
-+CONFIG_DRM_PANEL_VISIONOX_RM692E5_AMOLED_120HZ=m
-\ No newline at end of file

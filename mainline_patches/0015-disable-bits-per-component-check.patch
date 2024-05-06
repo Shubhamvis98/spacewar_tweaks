@@ -1,6 +1,8 @@
---- a/drivers/gpu/drm/msm/dsi/dsi_host.c	2024-04-21 08:52:01.000000000 +0000
-+++ b/drivers/gpu/drm/msm/dsi/dsi_host.c	2024-05-05 10:18:42.651096919 +0000
-@@ -1789,12 +1789,12 @@
+diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi_host.c
+index 9d86a6a..22f52f4 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi_host.c
++++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
+@@ -1789,12 +1789,12 @@ static int dsi_populate_dsc_params(struct msm_dsi_host *msm_host, struct drm_dsc
  		DRM_DEV_ERROR(&msm_host->pdev->dev, "DSI does not support fractional bits_per_pixel\n");
  		return -EINVAL;
  	}
